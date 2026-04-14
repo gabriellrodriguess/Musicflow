@@ -4,7 +4,303 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MusicFlow</title>
-  <link rel="stylesheet" href="./style.>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 20px 16px 60px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #1db954;
+    }
+
+    /* Player principal */
+    .player {
+      background-color: #181818;
+      border: 1px solid #282828;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .tocando-label {
+      font-size: 10px;
+      color: #1db954;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .album-arte {
+      width: 100%;
+      height: 160px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 70px;
+      margin-bottom: 20px;
+      background-color: #282828;
+    }
+
+    .info-musica {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .titulo-musica {
+      font-size: 18px;
+      font-weight: 700;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-favoritar {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+
+    .artista-musica {
+      font-size: 13px;
+      color: #888888;
+      margin-bottom: 18px;
+    }
+
+    /* Barra de progresso */
+    .barra-progresso {
+      width: 100%;
+      height: 4px;
+      background-color: #333333;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .progresso-preenchido {
+      height: 100%;
+      width: 0%;
+      background-color: #1db954;
+      border-radius: 4px;
+      transition: width 0.3s linear;
+    }
+
+    .tempo-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #666666;
+      margin-bottom: 20px;
+    }
+
+    /* Botões de controle */
+    .controles {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-controle {
+      background: none;
+      border: none;
+      color: #888888;
+      font-size: 20px;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-controle:hover {
+      color: #ffffff;
+      background-color: #282828;
+    }
+
+    .btn-controle.ativo {
+      color: #1db954;
+    }
+
+    .btn-play-pause {
+      background-color: #1db954 !important;
+      color: #000000 !important;
+      width: 58px !important;
+      height: 58px !important;
+      font-size: 24px !important;
+    }
+
+    .btn-play-pause:hover {
+      background-color: #1ed760 !important;
+      transform: scale(1.05);
+    }
+
+    /* Abas */
+    .abas {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .aba {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 1px solid #282828;
+      background: none;
+      color: #888888;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .aba:hover {
+      color: #ffffff;
+      border-color: #444444;
+    }
+
+    .aba.ativa {
+      background-color: #1db954;
+      border-color: #1db954;
+      color: #000000;
+    }
+
+    /* Lista de músicas */
+    .lista {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .item-musica {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background-color: #181818;
+      border: 1px solid #282828;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .item-musica:hover {
+      background-color: #222222;
+      border-color: #383838;
+    }
+
+    .item-musica.ativa {
+      border-color: rgba(29, 185, 84, 0.5);
+      background-color: rgba(29, 185, 84, 0.07);
+    }
+
+    .emoji-item {
+      font-size: 26px;
+      width: 46px;
+      height: 46px;
+      background-color: #282828;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-item {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nome-item {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+
+    .artista-item {
+      font-size: 12px;
+      color: #666666;
+    }
+
+    .direita-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .duracao-item {
+      font-size: 11px;
+      color: #666666;
+    }
+
+    .btn-fav-item {
+      background: none;
+      border: none;
+      font-size: 15px;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .btn-fav-item:hover,
+    .btn-fav-item.favoritada {
+      opacity: 1;
+    }
+
+    /* Estado vazio */
+    .estado-vazio {
+      text-align: center;
+      padding: 40px 20px;
+      color: #555555;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .estado-vazio .icone {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+  </style>
 </head>
 <body>
 
@@ -20,29 +316,27 @@
       <div class="album-arte" id="albumArte">🎵</div>
 
       <div class="info-musica">
-        <h2 id="tituloAtual">Selecione uma música</h2>
-        <button id="btnFavoritar" onclick="favoritarAtual()">🤍</button>
+        <h2 class="titulo-musica" id="tituloAtual">Selecione uma música</h2>
+        <button class="btn-favoritar" id="btnFavoritar" onclick="favoritarAtual()">🤍</button>
       </div>
 
-      <p id="artistaAtual" class="artista">—</p>
+      <p class="artista-musica" id="artistaAtual">—</p>
 
-      <!-- Barra de progresso -->
       <div class="barra-progresso" id="barraProgresso" onclick="pularPara(event)">
-        <div class="progresso-fill" id="progressoFill"></div>
+        <div class="progresso-preenchido" id="progressoPreenchido"></div>
       </div>
 
-      <div class="tempo">
+      <div class="tempo-row">
         <span id="tempoAtual">0:00</span>
         <span id="tempoDuracao">0:00</span>
       </div>
 
-      <!-- Controles -->
       <div class="controles">
-        <button id="btnAleatorio" onclick="toggleAleatorio()" title="Aleatório">🔀</button>
-        <button onclick="musicaAnterior()">⏮</button>
-        <button id="btnPlay" class="btn-play" onclick="togglePlay()">▶</button>
-        <button onclick="proximaMusica()">⏭</button>
-        <button id="btnRepetir" onclick="toggleRepetir()" title="Repetir">🔁</button>
+        <button class="btn-controle" id="btnAleatorio" onclick="toggleAleatorio()" title="Aleatório">🔀</button>
+        <button class="btn-controle" onclick="musicaAnterior()">⏮</button>
+        <button class="btn-controle btn-play-pause" id="btnPlay" onclick="togglePlay()">▶</button>
+        <button class="btn-controle" onclick="proximaMusica()">⏭</button>
+        <button class="btn-controle" id="btnRepetir" onclick="toggleRepetir()" title="Repetir">🔁</button>
       </div>
 
     </div>
@@ -54,10 +348,301 @@
     </div>
 
     <!-- Lista de músicas -->
-    <div class="lista-musicas" id="listaMusicas"></div>
+    <div class="lista" id="lista"></div>
 
   </div>
 
-  <script src="script.js"></script>
+  <script>
+
+    // Lista de músicas
+    const musicas = [
+      { id: 1, titulo: "Blinding Lights", artista: "The Weeknd", duracao: "3:20", emoji: "🌙" },
+      { id: 2, titulo: "Flowers", artista: "Miley Cyrus", duracao: "3:21", emoji: "🌸" },
+      { id: 3, titulo: "As It Was", artista: "Harry Styles", duracao: "2:47", emoji: "🌊" },
+      { id: 4, titulo: "Anti-Hero", artista: "Taylor Swift", duracao: "3:21", emoji: "🦋" },
+      { id: 5, titulo: "Unholy", artista: "Sam Smith", duracao: "2:36", emoji: "🔥" },
+      { id: 6, titulo: "Levitating", artista: "Dua Lipa", duracao: "3:24", emoji: "✨" },
+      { id: 7, titulo: "Stay", artista: "The Kid LAROI", duracao: "2:21", emoji: "💫" },
+      { id: 8, titulo: "Heat Waves", artista: "Glass Animals", duracao: "3:59", emoji: "🎸" },
+      { id: 9, titulo: "Midnight Rain", artista: "Taylor Swift", duracao: "3:53", emoji: "🌧️" },
+      { id: 10, titulo: "Bad Habit", artista: "Steve Lacy", duracao: "3:52", emoji: "🎵" },
+    ]
+
+    // Estado da aplicação
+    let indiceAtual = 0
+    let tocando = false
+    let aleatorio = false
+    let repetir = false
+    let abaAtual = "todas"
+    let progresso = 0
+    let intervalo = null
+
+    // Pega os favoritos salvos no localStorage
+    let favoritos = JSON.parse(localStorage.getItem("musicflow_favoritos")) || []
+
+    // Salva os favoritos no localStorage
+    function salvarFavoritos() {
+      localStorage.setItem("musicflow_favoritos", JSON.stringify(favoritos))
+    }
+
+    // Verifica se uma música é favorita
+    function ehFavorita(id) {
+      return favoritos.includes(id)
+    }
+
+    // Adiciona ou remove dos favoritos
+    function toggleFavorito(id) {
+      if (ehFavorita(id)) {
+        favoritos = favoritos.filter(function(f) {
+          return f !== id
+        })
+      } else {
+        favoritos.push(id)
+      }
+      salvarFavoritos()
+      atualizarBotaoFavoritoPlayer()
+      renderizarLista()
+    }
+
+    // Favorita a música que está no player
+    function favoritarAtual() {
+      const musica = musicas[indiceAtual]
+      toggleFavorito(musica.id)
+    }
+
+    // Atualiza o coração no player
+    function atualizarBotaoFavoritoPlayer() {
+      const musica = musicas[indiceAtual]
+      const btn = document.getElementById("btnFavoritar")
+      if (ehFavorita(musica.id)) {
+        btn.textContent = "❤️"
+      } else {
+        btn.textContent = "🤍"
+      }
+    }
+
+    // Carrega uma música no player
+    function carregarMusica(indice) {
+      indiceAtual = indice
+      const musica = musicas[indice]
+
+      document.getElementById("tituloAtual").textContent = musica.titulo
+      document.getElementById("artistaAtual").textContent = musica.artista
+      document.getElementById("tempoDuracao").textContent = musica.duracao
+      document.getElementById("albumArte").textContent = musica.emoji
+      document.getElementById("progressoPreenchido").style.width = "0%"
+      document.getElementById("tempoAtual").textContent = "0:00"
+
+      progresso = 0
+      atualizarBotaoFavoritoPlayer()
+      renderizarLista()
+    }
+
+    // Play ou pause
+    function togglePlay() {
+      tocando = !tocando
+      const btn = document.getElementById("btnPlay")
+
+      if (tocando) {
+        btn.textContent = "⏸"
+        iniciarProgresso()
+      } else {
+        btn.textContent = "▶"
+        pararProgresso()
+      }
+    }
+
+    // Simula o progresso da música
+    function iniciarProgresso() {
+      pararProgresso()
+
+      const partes = musicas[indiceAtual].duracao.split(":")
+      const totalSegundos = parseInt(partes[0]) * 60 + parseInt(partes[1])
+
+      intervalo = setInterval(function() {
+        progresso += (100 / totalSegundos) * 0.5
+
+        if (progresso >= 100) {
+          progresso = 100
+          pararProgresso()
+          setTimeout(function() {
+            if (repetir) {
+              progresso = 0
+              iniciarProgresso()
+            } else {
+              proximaMusica()
+            }
+          }, 500)
+        }
+
+        const segundosPassados = Math.floor((progresso / 100) * totalSegundos)
+        const m = Math.floor(segundosPassados / 60)
+        const s = segundosPassados % 60
+        document.getElementById("tempoAtual").textContent = m + ":" + s.toString().padStart(2, "0")
+        document.getElementById("progressoPreenchido").style.width = progresso + "%"
+
+      }, 500)
+    }
+
+    // Para o progresso
+    function pararProgresso() {
+      if (intervalo) {
+        clearInterval(intervalo)
+        intervalo = null
+      }
+    }
+
+    // Clica na barra para pular
+    function pularPara(event) {
+      const barra = event.currentTarget
+      const rect = barra.getBoundingClientRect()
+      progresso = ((event.clientX - rect.left) / rect.width) * 100
+
+      const partes = musicas[indiceAtual].duracao.split(":")
+      const totalSegundos = parseInt(partes[0]) * 60 + parseInt(partes[1])
+      const segundosPassados = Math.floor((progresso / 100) * totalSegundos)
+      const m = Math.floor(segundosPassados / 60)
+      const s = segundosPassados % 60
+
+      document.getElementById("tempoAtual").textContent = m + ":" + s.toString().padStart(2, "0")
+      document.getElementById("progressoPreenchido").style.width = progresso + "%"
+    }
+
+    // Próxima música
+    function proximaMusica() {
+      pararProgresso()
+      progresso = 0
+
+      let proximo
+      if (aleatorio) {
+        proximo = Math.floor(Math.random() * musicas.length)
+      } else {
+        proximo = (indiceAtual + 1) % musicas.length
+      }
+
+      carregarMusica(proximo)
+      if (tocando) iniciarProgresso()
+    }
+
+    // Música anterior
+    function musicaAnterior() {
+      pararProgresso()
+      progresso = 0
+      const anterior = (indiceAtual - 1 + musicas.length) % musicas.length
+      carregarMusica(anterior)
+      if (tocando) iniciarProgresso()
+    }
+
+    // Liga/desliga aleatório
+    function toggleAleatorio() {
+      aleatorio = !aleatorio
+      const btn = document.getElementById("btnAleatorio")
+      if (aleatorio) {
+        btn.classList.add("ativo")
+      } else {
+        btn.classList.remove("ativo")
+      }
+    }
+
+    // Liga/desliga repetir
+    function toggleRepetir() {
+      repetir = !repetir
+      const btn = document.getElementById("btnRepetir")
+      if (repetir) {
+        btn.classList.add("ativo")
+      } else {
+        btn.classList.remove("ativo")
+      }
+    }
+
+    // Muda aba
+    function mostrarAba(aba) {
+      abaAtual = aba
+      document.getElementById("abaTodasBtn").classList.remove("ativa")
+      document.getElementById("abaFavoritasBtn").classList.remove("ativa")
+
+      if (aba === "todas") {
+        document.getElementById("abaTodasBtn").classList.add("ativa")
+      } else {
+        document.getElementById("abaFavoritasBtn").classList.add("ativa")
+      }
+
+      renderizarLista()
+    }
+
+    // Seleciona música da lista
+    function selecionarMusica(indice) {
+      pararProgresso()
+      carregarMusica(indice)
+
+      if (!tocando) {
+        tocando = true
+        document.getElementById("btnPlay").textContent = "⏸"
+      }
+
+      iniciarProgresso()
+    }
+
+    // Renderiza a lista de músicas
+    function renderizarLista() {
+      const lista = document.getElementById("lista")
+
+      let musicasFiltradas
+      if (abaAtual === "favoritas") {
+        musicasFiltradas = musicas.filter(function(m) {
+          return ehFavorita(m.id)
+        })
+      } else {
+        musicasFiltradas = musicas
+      }
+
+      if (musicasFiltradas.length === 0) {
+        lista.innerHTML = `
+          <div class="estado-vazio">
+            <div class="icone">💔</div>
+            <p>Nenhuma música favorita ainda.<br>Toque ❤️ para favoritar!</p>
+          </div>
+        `
+        return
+      }
+
+      lista.innerHTML = ""
+
+      musicasFiltradas.forEach(function(musica) {
+        const indiceReal = musicas.indexOf(musica)
+        const estaAtiva = indiceAtual === indiceReal
+        const eFavorita = ehFavorita(musica.id)
+
+        const div = document.createElement("div")
+        div.classList.add("item-musica")
+        if (estaAtiva) {
+          div.classList.add("ativa")
+        }
+
+        div.innerHTML = `
+          <div class="emoji-item">${musica.emoji}</div>
+          <div class="info-item">
+            <div class="nome-item">${musica.titulo}</div>
+            <div class="artista-item">${musica.artista}</div>
+          </div>
+          <div class="direita-item">
+            <span class="duracao-item">${musica.duracao}</span>
+            <button class="btn-fav-item ${eFavorita ? "favoritada" : ""}" onclick="event.stopPropagation(); toggleFavorito(${musica.id})">${eFavorita ? "❤️" : "🤍"}</button>
+          </div>
+        `
+
+        div.addEventListener("click", function() {
+          selecionarMusica(indiceReal)
+        })
+
+        lista.appendChild(div)
+      })
+    }
+
+    // Inicia o app
+    carregarMusica(0)
+    renderizarLista()
+
+  </script>
 </body>
 </html>
