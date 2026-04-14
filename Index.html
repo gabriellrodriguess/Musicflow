@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusicFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1 class="logo">Music<span>Flow</span></h1>
+
+    <!-- Player principal -->
+    <div class="player">
+
+      <p class="tocando-label">▶ tocando agora</p>
+
+      <div class="album-arte" id="albumArte">🎵</div>
+
+      <div class="info-musica">
+        <h2 id="tituloAtual">Selecione uma música</h2>
+        <button id="btnFavoritar" onclick="favoritarAtual()">🤍</button>
+      </div>
+
+      <p id="artistaAtual" class="artista">—</p>
+
+      <!-- Barra de progresso -->
+      <div class="barra-progresso" id="barraProgresso" onclick="pularPara(event)">
+        <div class="progresso-fill" id="progressoFill"></div>
+      </div>
+
+      <div class="tempo">
+        <span id="tempoAtual">0:00</span>
+        <span id="tempoDuracao">0:00</span>
+      </div>
+
+      <!-- Controles -->
+      <div class="controles">
+        <button id="btnAleatorio" onclick="toggleAleatorio()" title="Aleatório">🔀</button>
+        <button onclick="musicaAnterior()">⏮</button>
+        <button id="btnPlay" class="btn-play" onclick="togglePlay()">▶</button>
+        <button onclick="proximaMusica()">⏭</button>
+        <button id="btnRepetir" onclick="toggleRepetir()" title="Repetir">🔁</button>
+      </div>
+
+    </div>
+
+    <!-- Abas -->
+    <div class="abas">
+      <button class="aba ativa" id="abaTodasBtn" onclick="mostrarAba('todas')">Todas</button>
+      <button class="aba" id="abaFavoritasBtn" onclick="mostrarAba('favoritas')">Favoritas ❤️</button>
+    </div>
+
+    <!-- Lista de músicas -->
+    <div class="lista-musicas" id="listaMusicas"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
